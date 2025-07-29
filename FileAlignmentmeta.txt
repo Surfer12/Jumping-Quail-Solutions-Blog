@@ -1,0 +1,8 @@
+//
+//  FileAlignmentmeta.txt
+//  Jumping Quail Solutions Blog
+//
+//  Created by Ryan David Oates on 7/22/25.
+//
+
+import Foundation

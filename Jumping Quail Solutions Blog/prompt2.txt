@@ -1,0 +1,132 @@
+The YAML augmentation you’ve outlined is excellent, and I can help you apply it directly to your Interactive Logic Tracer canvas component. Since live updates to the canvas failed, here’s exactly how to patch the annotation.yaml field for each logic step inside your code:
+
+⸻
+
+🔧 Step 1
+
+annotation: {
+  type: "lemma",
+  yaml: `
+confidence: 1.0
+neuro_trigger: ["PatternAgent", "chord_perpendicularity"]
+symbolic_score: 0.95
+psi:
+  alpha: 0.5
+  Sx: 0.95
+  Nx: 0.88
+  Rcog: 0.05
+  Reff: 0.02
+  P_H:
+    source: ["olympiad_archive", "interactive_learner_bias"]
+    beta: 0.3
+agents:
+  - name: PatternAgent
+    role: neural_heuristic
+  - name: VerifierAgent
+    role: symbolic_checker
+  - name: Coordinator
+    role: meta_optimizer
+`
+}
+
+
+⸻
+
+🔧 Step 2
+
+annotation: {
+  type: "definition",
+  yaml: `
+confidence: 0.98
+neuro_trigger: ["PatternAgent", "equidistant_triangle_center"]
+symbolic_score: 0.93
+psi:
+  alpha: 0.5
+  Sx: 0.93
+  Nx: 0.91
+  Rcog: 0.06
+  Reff: 0.03
+  P_H:
+    source: ["olympiad_archive", "interactive_learner_bias"]
+    beta: 0.3
+agents:
+  - name: PatternAgent
+    role: neural_heuristic
+  - name: VerifierAgent
+    role: symbolic_checker
+  - name: Coordinator
+    role: meta_optimizer
+`
+}
+
+
+⸻
+
+🔧 Step 3
+
+annotation: {
+  type: "inference",
+  yaml: `
+confidence: 0.95
+neuro_trigger: ["PatternAgent", "miquel_spiral_detection"]
+symbolic_score: 0.96
+psi:
+  alpha: 0.5
+  Sx: 0.96
+  Nx: 0.94
+  Rcog: 0.07
+  Reff: 0.04
+  P_H:
+    source: ["olympiad_archive", "interactive_learner_bias"]
+    beta: 0.3
+agents:
+  - name: PatternAgent
+    role: neural_heuristic
+  - name: VerifierAgent
+    role: symbolic_checker
+  - name: Coordinator
+    role: meta_optimizer
+`
+}
+
+
+⸻
+
+🔧 Step 4
+
+annotation: {
+  type: "goal",
+  yaml: `
+confidence: 0.97
+neuro_trigger: ["PatternAgent", "isogonal_reflection_pm"]
+symbolic_score: 0.98
+psi:
+  alpha: 0.5
+  Sx: 0.98
+  Nx: 0.93
+  Rcog: 0.06
+  Reff: 0.05
+  P_H:
+    source: ["olympiad_archive", "interactive_learner_bias"]
+    beta: 0.3
+agents:
+  - name: PatternAgent
+    role: neural_heuristic
+  - name: VerifierAgent
+    role: symbolic_checker
+  - name: Coordinator
+    role: meta_optimizer
+`
+}
+
+
+⸻
+
+✅ Next Action Options:
+
+Would you like me to:
+	1.	Embed a Ψ(x) evolution tracker as a stacked bar chart per step?
+	2.	Scaffold a “step regulator” overlay that flashes warnings if R_{\text{cognitive}} + R_{\text{efficiency}} > \varepsilon?
+	3.	Add an export-to-.md or .json button bundling steps and YAML reasoning?
+
+I can prep the JSX or chart config — just say the word.

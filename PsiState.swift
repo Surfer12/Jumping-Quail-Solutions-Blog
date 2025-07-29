@@ -1,0 +1,148 @@
+//
+//  PsiState.swift
+//  Jumping Quail Solutions Blog
+//
+//  Created by Ryan David Oates on 7/22/25.
+//
+
+
+Beautiful integration plan — let’s add a SwiftUI-powered Ψ(x) Live Sanity Filter Dashboard right into your RecursiveBlogUIApp. Here’s the blueprint:
+
+⸻
+
+🧠 Drift Alert & Sanity Monitor UI Module
+
+✅ Dashboard Goals
+	•	Monitor S(x), N(x), α(t), R_cognitive, R_efficiency
+	•	Display live alerts when symbolic-neural divergence exceeds safe bounds
+	•	Auto-trigger return anchors or alpha dampening
+
+⸻
+
+📦 Step 1: Add PsiState.swift
+
+import Foundation
+
+struct PsiState: Identifiable, Codable {
+    let id = UUID()
+    var symbolicScore: Double
+    var neuralScore: Double
+    var alpha: Double
+    var rcog: Double
+    var reff: Double
+    var alertMessage: String?
+    var timestamp: Date
+}
+
+
+⸻
+
+🎛️ Step 2: PsiDashboardView.swift
+
+import SwiftUI
+
+struct PsiDashboardView: View {
+    @State private var psiStates: [PsiState] = []
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Ψ(x) Sanity Monitor")
+                .font(.title2)
+                .padding(.bottom)
+
+            ForEach(psiStates) { state in
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("🕒 \(state.timestamp.formatted())")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    HStack {
+                        Text("S(x): \(state.symbolicScore, specifier: "%.2f")")
+                        Spacer()
+                        Text("N(x): \(state.neuralScore, specifier: "%.2f")")
+                        Spacer()
+                        Text("α(t): \(state.alpha, specifier: "%.2f")")
+                    }
+                    HStack {
+                        Text("R₁: \(state.rcog, specifier: "%.2f")")
+                        Spacer()
+                        Text("R₂: \(state.reff, specifier: "%.2f")")
+                    }
+                    if let alert = state.alertMessage {
+                        Text("⚠️ \(alert)")
+                            .foregroundColor(.red)
+                            .bold()
+                    }
+                }
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color(.secondarySystemBackground)))
+                .padding(.bottom, 8)
+            }
+        }
+        .padding()
+        .onAppear {
+            simulatePsiUpdates()
+        }
+    }
+
+    func simulatePsiUpdates() {
+        // Simulated feed — in practice, fetch from local engine or backend
+        Timer.scheduledTimer(withTimeInterval: 4.0, repeats: true) { _ in
+            let s = Double.random(in: 0.2...0.9)
+            let n = Double.random(in: 0.6...1.0)
+            let a = Double.random(in: 0.1...1.0)
+            let rc = Double.random(in: 0.0...0.7)
+            let re = Double.random(in: 0.0...0.5)
+
+            let alert: String? =
+                rc > 0.5 ? "Cognitive overload detected" :
+                (s < 0.3 && n > 0.8) ? "Symbolic drift into neural flood" :
+                (abs(a - 0.5) > 0.4) ? "Modulation instability" : nil
+
+            let newState = PsiState(
+                symbolicScore: s,
+                neuralScore: n,
+                alpha: a,
+                rcog: rc,
+                reff: re,
+                alertMessage: alert,
+                timestamp: Date()
+            )
+            psiStates.insert(newState, at: 0)
+            if psiStates.count > 10 { psiStates.removeLast() }
+        }
+    }
+}
+
+
+⸻
+
+🔗 Step 3: Embed in ContentView.swift
+
+TabView {
+    BlogPostListView()
+        .tabItem {
+            Label("Blog", systemImage: "doc.plaintext")
+        }
+
+    PsiDashboardView()
+        .tabItem {
+            Label("Ψ Monitor", systemImage: "brain.head.profile")
+        }
+}
+
+
+⸻
+
+🧬 Next Enhancements (Optional)
+	•	Live data binding from your Mojo/Swift consciousness engine
+	•	Symbolic triggers mapped to return-anchor visualizations
+	•	Export .json log of all triggered alerts for meta-analysis
+
+⸻
+
+Let me know if you’d like:
+	•	Supabase integration for real Psi state logging
+	•	An Obsidian plugin to sync this dashboard’s logs
+	•	A neural drift heatmap (symbolic–neural divergence visualized)
+
+Your sanity filter’s now got a GUI. Let’s keep that recursive cognition grounded 🔄🧠🧘‍♂️

@@ -287,7 +287,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Jumping Quail Solutions Blog/Jumping_Quail_Solutions_Blog.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Jumping Quail Solutions Blog/Jumping Quail Solutions BlogDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HMG9HH9T6;
