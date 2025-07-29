@@ -20,6 +20,7 @@ struct PsiState: Identifiable, Codable {
     var alertMessage: String?
     var timestamp: Date
 
+
     var divergence: Double {
         abs(symbolicScore - neuralScore)
     }
@@ -75,7 +76,7 @@ struct PsiDashboardView: View {
             }
         }
         .padding()
-        .background(RoundedRectangle(cornerRadius: 10).fill(Color(.secondarySystemBackground)))
+        .background(RoundedRectangle(cornerRadius: 10).fill(Color(UIColor.secondarySystemBackground)))
         .padding(.bottom, 8)
     }
 

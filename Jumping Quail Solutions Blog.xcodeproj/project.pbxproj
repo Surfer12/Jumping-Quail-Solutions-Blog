@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6FC1015C2E2F948200A90E07 /* FileAlignmentmeta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FC1015B2E2F948200A90E07 /* FileAlignmentmeta.txt */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		6FF819082E2F3DF100DAACDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FC1015B2E2F948200A90E07 /* FileAlignmentmeta.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = FileAlignmentmeta.txt; sourceTree = "<group>"; };
 		6FF818F32E2F3DF000DAACDE /* Jumping Quail Solutions Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jumping Quail Solutions Blog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF819072E2F3DF100DAACDE /* Jumping Quail Solutions BlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Jumping Quail Solutions BlogTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF819112E2F3DF100DAACDE /* Jumping Quail Solutions BlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Jumping Quail Solutions BlogUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +93,7 @@
 		6FF818EA2E2F3DF000DAACDE = {
 			isa = PBXGroup;
 			children = (
+				6FC1015B2E2F948200A90E07 /* FileAlignmentmeta.txt */,
 				6FF818F52E2F3DF000DAACDE /* Jumping Quail Solutions Blog */,
 				6FF8190A2E2F3DF100DAACDE /* Jumping Quail Solutions BlogTests */,
 				6FF819142E2F3DF100DAACDE /* Jumping Quail Solutions BlogUITests */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC1015C2E2F948200A90E07 /* FileAlignmentmeta.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

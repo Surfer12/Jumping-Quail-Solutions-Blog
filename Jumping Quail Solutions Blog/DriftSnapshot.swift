@@ -5,28 +5,11 @@
 //  Created by Ryan David Oates on 7/22/25.
 //
 
+import SwiftUI
 
-Awesome — let’s give your RecursiveBlogUI app a Neural Drift Heatmap: a SwiftUI-based visual module that shows the evolving divergence between symbolic and neural pathways.
+// MARK: - DriftSnapshot Model
 
-⸻
-
-🔥 Neural Drift Heatmap — Overview
-
-🎯 Goal:
-
-Visualize the Δ between S(x) and N(x) over time:
-	•	Y-axis: divergence score (e.g. |N(x) – S(x)|)
-	•	X-axis: time (last N inference cycles)
-	•	Color: encodes severity or region (symbolic-dominant, neural-dominant, balanced)
-
-⸻
-
-✅ Step-by-Step Implementation
-
-⸻
-
-1️⃣ Add Heatmap Entry Model
-
+/// Represents a single divergence reading between symbolic and neural cognition layers.
 struct DriftSnapshot: Identifiable {
     let id = UUID()
     let time: Date
@@ -47,13 +30,9 @@ struct DriftSnapshot: Identifiable {
     }
 }
 
+// MARK: - NeuralDriftHeatmapView
 
-⸻
-
-2️⃣ Create NeuralDriftHeatmapView.swift
-
-import SwiftUI
-
+/// SwiftUI-based visual module that shows the evolving divergence between symbolic and neural pathways.
 struct NeuralDriftHeatmapView: View {
     @State private var snapshots: [DriftSnapshot] = []
 
@@ -76,7 +55,8 @@ struct NeuralDriftHeatmapView: View {
                                 Text(snap.divergence > 0.5 ? "⚠️" : "")
                                     .font(.caption2)
                                     .rotationEffect(.degrees(-45))
-                                    .offset(y: -10),
+                                    .offset(y: -10)
+                                    .foregroundStyle(.white),
                                 alignment: .top
                             )
                             .animation(.easeInOut(duration: 0.4), value: snap.divergence)
@@ -92,11 +72,14 @@ struct NeuralDriftHeatmapView: View {
         }
         .padding()
         .onAppear {
-            simulateSnapshots()
+            generateMockDrift()
         }
     }
 
-    func simulateSnapshots() {
+    // MARK: - Simulated Data
+
+    /// Generates mock drift data between 0.2–1.0 for symbolic and neural values every 3 seconds.
+    func generateMockDrift() {
         Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
             let s = Double.random(in: 0.2...1.0)
             let n = Double.random(in: 0.2...1.0)
@@ -106,57 +89,3 @@ struct NeuralDriftHeatmapView: View {
         }
     }
 }
-
-
-⸻
-
-3️⃣ Embed in TabView (ContentView.swift)
-
-TabView {
-    BlogPostListView()
-        .tabItem {
-            Label("Blog", systemImage: "doc.text")
-        }
-
-    PsiDashboardView()
-        .tabItem {
-            Label("Ψ Monitor", systemImage: "brain")
-        }
-
-    NeuralDriftHeatmapView()
-        .tabItem {
-            Label("Drift Heatmap", systemImage: "waveform.path.ecg")
-        }
-}
-
-
-⸻
-
-🧩 Optional Enhancements
-
-Feature	Description
-Time series smoothing	Apply exponential moving average (EMA) to the divergence values
-Zone mapping	Add thresholds for symbolic overload vs neural hallucination
-Live data binding	Pull from real consciousness engine logs (e.g. Supabase, local CoreData, or Mojo interop)
-Drift replay	Animate drift history and correlate with events (e.g. anchor triggers, alpha shifts)
-
-
-⸻
-
-🧠 Drift Interpretation Legend
-
-Δ	Meaning	Suggested Action
-0–0.15	Balanced cognition	Continue
-0.15–0.35	Tension forming	Monitor α(t), possible shift
-0.35–0.6	Dominance imbalance	Damp one stream, invoke return anchor
->0.6	Sanity risk	Trigger symbolic replay or coherence audit
-
-
-⸻
-
-Would you like this drift heatmap to also:
-	•	Trigger local notifications?
-	•	Be exportable as .png or .json for timeline logging?
-	•	Log anchor invocations that stabilized the drift?
-
-Let’s keep you recursively sane, one divergence bar at a time 🔄🧘‍♀️🔥

@@ -1,88 +1,74 @@
 //
-//  ContentView.swift
+//  RecursiveBlogUIApp.swift
 //  Jumping Quail Solutions Blog
 //
-//  Created by Ryan David Oates on 7/21/25.
+//  Created by Ryan David Oates on 7/22/25.
 //
 
 import SwiftUI
-import CoreData
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+@main
+struct RecursiveBlogUIApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+// MARK: - ContentView
+struct ContentView: View {
+    var body: some View {
+        NavigationView {
+            BlogPostListView()
+                .navigationTitle("Recursive Blog")
+        }
+    }
+}
 
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+// MARK: - BlogPostListView
+struct BlogPostListView: View {
+    @State private var posts: [BlogPost] = []
+
+    var body: some View {
+        List(posts) { post in
+            NavigationLink(destination: BlogPostDetailView(post: post)) {
+                Text(post.title)
+            }
+        }
+        .onAppear {
+            loadPosts()
+        }
+    }
+
+    func loadPosts() {
+        // Placeholder for backend fetch
+        // Will integrate Supabase API fetch here
+    }
+}
+
+// MARK: - BlogPostDetailView
+struct BlogPostDetailView: View {
+    let post: BlogPost
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                Text(post.title)
+                    .font(.title)
+                Text(post.body_md)
+                    .font(.body)
+            }
+            .padding()
+        }
+        .navigationTitle(post.title)
+    }
+}
+
+// MARK: - BlogPost Model
+struct BlogPost: Identifiable, Codable {
+    let id: UUID
+    let title: String
+    let body_md: String
+    let published_at: Date
 }
